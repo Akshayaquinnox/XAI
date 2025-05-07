@@ -1,22 +1,34 @@
-import rdflib
-import random
 import pandas as pd
 
-# completeDataset_tsv_file = '.\\completeDataset.tsv'
-testSet_tsv_file= '.\\testSet.tsv'
-trainingSet_tsv_file= '.\\trainingSet.tsv'
+# File paths for TSV and CSV files
+completeDataset_tsv_file = '.\\completeDataset.tsv'
+testSet_tsv_file = '.\\testSet.tsv'
+trainingSet_tsv_file = '.\\trainingSet.tsv'
 
-# completeDataset_csv_file='.\completeDataset.csv'
-testSet_csv_file='.\\testSet.csv'    
-trainingSet_csv_file='.\\trainingSet.csv'
+completeDataset_1_csv_file = '.\\rdf_triples_completeDataset.csv'
+testSet_1_csv_file = '.\\rdf_triples_testSet.csv'
+trainingSet_1_csv_file = '.\\rdf_triples_trainingSet.csv'
 
+# Define the predicate (assumed for all rows)
+predicate = "http://swrc.ontoware.org/ontology#affiliation"
 
-def convert_tsv_to_csv(tsv_file, csv_file):
-    df = pd.read_csv(tsv_file)  
-    df.to_csv(csv_file, index=False)      
-    print(f"Converted {tsv_file} to {csv_file}")
+# Function to convert TSV to RDF triples in CSV format
+def convert_tsv_to_rdf_triples(tsv_file, csv_file):
+    # Load the TSV file
+    df = pd.read_csv(tsv_file, sep='\t')
+    
+    # Create a new DataFrame for RDF triples
+    rdf_triples = pd.DataFrame({
+        "subject": df["person"],  # Map 'person' column to 'subject'
+        "predicate": predicate,   # Use the same predicate for all rows
+        "object": df["label_affiliation"]  # Map 'label_affiliation' column to 'object'
+    })
+    
+    # Save the RDF triples to a new CSV file
+    rdf_triples.to_csv(csv_file, index=False)
+    print(f"Converted {tsv_file} to RDF triples in {csv_file}")
 
-# Convert each TSV file to CSV
-# convert_tsv_to_csv(completeDataset_tsv_file, completeDataset_csv_file)
-# convert_tsv_to_csv(testSet_tsv_file, testSet_csv_file)
-# convert_tsv_to_csv(trainingSet_tsv_file, trainingSet_csv_file)
+# Convert each TSV file to RDF triples
+convert_tsv_to_rdf_triples(completeDataset_tsv_file, completeDataset_1_csv_file)
+convert_tsv_to_rdf_triples(testSet_tsv_file, testSet_1_csv_file)
+convert_tsv_to_rdf_triples(trainingSet_tsv_file, trainingSet_1_csv_file)
