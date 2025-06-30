@@ -5,7 +5,7 @@ This repository implements a movie-genre classification pipeline that extracts f
 ## Setup Instructions
 
 ### Prerequisites
-- Python 3.10+ or Python 3.12.0
+- Python 3.12.0
 - pip 24.2+ or pip 23.2.1
 - Conda (recommended)
 
@@ -19,7 +19,7 @@ This repository implements a movie-genre classification pipeline that extracts f
 
 2. **Create conda environment**
    ```bash
-   conda create -n xai-env python=3.10
+   conda create -n xai-env python=3.12
    conda activate xai-env
    ```
 
@@ -42,55 +42,25 @@ This repository implements a movie-genre classification pipeline that extracts f
 
 2. **Open the main notebook**
    ```
-   shap_analysis.ipynb
+   movie_explainability.ipynb
    ```
 
-3. **Run all cells** to execute the SHAP analysis
-
-### Alternative Setup (Virtual Environment)
-
-If you prefer using venv instead of conda:
-
-```bash
-python -m venv venv
-
-# Activate environment
-# On macOS/Linux:
-source venv/bin/activate
-# On Windows:
-.\venv\Scripts\activate
-
-# Install dependencies
-pip install shap pandas numpy scikit-learn matplotlib jupyter rdflib sparqlwrapper
-```
+3. **Run all cells** to execute.
 
 ### Project Structure
 
 ```
 XAI/
-├── shap_analysis.ipynb    # Main analysis notebook
-├── requirements.txt       # Python dependencies
-└── README.md             # This file
+├── movie_explainability.ipynb      # Main analysis notebook
+├── requirements.txt                # Python dependencies
+└── README.md                       # This file
 ```
 
 ### Usage
 
 The notebook demonstrates:
 - DBpedia data extraction using SPARQL queries for movie metadata
-- Feature engineering from RDF triples (directors, actors, producers, distributors)
+- Feature engineering from RDF triples.
 - Gradient Boosting classifier training for comedy vs drama classification
 - Four interpretability techniques: Gini importance, permutation importance, SHAP values, and surrogate decision trees
-- Comprehensive model explanation revealing how director and actor metadata influence predictions
-
-### Requirements
-
-Core dependencies include:
-- `shap` - For explainable AI analysis
-- `pandas` - Data manipulation
-- `numpy` - Numerical computations
-- `scikit-learn` - Machine learning models (Gradient Boosting)
-- `matplotlib` - Data visualization
-- `jupyter` - Interactive notebook environment
-- `rdflib` - RDF data processing
-- `sparqlwrapper` - SPARQL query execution for DBpedia
 
