@@ -1,0 +1,8 @@
+SPARQLWrapper
+matplotlib
+numpy
+os
+pandas
+scikit-learn
+seaborn
+shap
